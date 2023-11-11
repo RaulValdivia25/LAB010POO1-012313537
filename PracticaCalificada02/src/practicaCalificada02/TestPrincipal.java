@@ -49,9 +49,6 @@ public class TestPrincipal
 					case 1:
 					{
 						boolean salirIngresoDatos = false;
-						boolean salirIngresarDNI = false;
-						boolean salirIngresarPeso = false;
-						boolean salirIngresarTemperatura = false;
 						
 						salirRespuestaYN = false;
 						
@@ -68,58 +65,15 @@ public class TestPrincipal
 						System.out.println("--Registrar paciente--");
 						do
 						{
-							do
-							{
-									System.out.println("Ingrese el DNI del paciente: ");
-								
-								try
-								{
-									DNI = entradaInt.nextInt();
-									salirIngresarDNI = true;
-								}
-								
-								catch(InputMismatchException ex)
-								{
-									System.out.println("ERROR. INGRESE CARACTERES VALIDOS");
-									entradaInt.reset();
-								}
-							}
-							while(salirIngresarDNI == false);
-							
-							do
-							{
-									System.out.println("Ingrese el peso del paciente: ");
-								
-								try
-								{
-									peso = entradaInt.nextDouble();
-									salirIngresarPeso = true;
-								}
-								
-								catch(InputMismatchException ex)
-								{
-									System.out.println("ERROR. INGRESE CARACTERES VALIDOS");
-								}
-							}
-							while(salirIngresarPeso == false);
-							
-							do
-							{
-									System.out.println("Ingrese la temperatura del paciente: ");
-								
-								try
-								{
-									temperatura = entradaInt.nextDouble();
-									salirIngresarTemperatura = true;
-								}
-								
-								catch(InputMismatchException ex)
-								{
-									System.out.println("ERROR. INGRESE CARACTERES VALIDOS");
-								}
-							}
-							while(salirIngresarTemperatura == false);
-							
+							System.out.println("Ingrese el DNI del paciente: ");
+							DNI = entradaInt.nextInt();
+
+							System.out.println("Ingrese el peso del paciente: ");
+							peso = entradaInt.nextDouble();
+
+							System.out.println("Ingrese la temperatura del paciente: ");
+							temperatura = entradaInt.nextDouble();
+
 							System.out.println("Ingrese el nombre del paciente: ");
 							nombre = entradaString.next();
 							
@@ -169,9 +123,63 @@ public class TestPrincipal
 				
 					case 2:
 					{
+						int posicionRemover;
+						
+						salirRespuestaYN = false;
+						boolean salirOpcion2 = false;
+						
+						/*-----------------------*/
+						
 						System.out.println("--Remover paciente--");
 						hospital.mostrarPacientes();
+						
+						do
+						{
+							System.out.println("QUE PACIENTE VA A REMOVER?");
+							posicionRemover = entradaInt.nextInt();
+						
+							do
+							{
+								System.out.println("ESTA SEGURO? (Y/N)");
+
+								try
+								{
+									respuestaYN = entradaYN.next();
+									
+									if(respuestaYN.equals("Y") || respuestaYN.equals("y"))
+									{
+										salirOpcion2 = true;
+										salirRespuestaYN = true;
+									}
+									
+									else if(respuestaYN.equals("N") || respuestaYN.equals("n"))
+									{
+										System.out.println("Ingrese el dato nuevamente");
+										salirRespuestaYN = true;
+									}
+									
+									else
+									{
+										System.out.println("RESPUESTA INVALIDA");
+									}
+								}
+								
+								catch(InputMismatchException ex)
+								{
+									System.out.println("CARACTER INVALIDO");
+								}	
+							}
+							while(salirRespuestaYN == false);
+						}
+						while(salirOpcion2 == false);
+						
+						hospital.removerPacientePorPosicion(posicionRemover);
+						
+						System.out.println("Paciente removido");
+						break;
 					}
+						
+
 					
 					case 3:
 					{
