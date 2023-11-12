@@ -84,6 +84,18 @@ public class Paciente
 	{
 		this.medicoAsignado = medicoAsignado;
 	}
+	
+	public String getApellido()
+	{
+		String apellido = new String();
+		String[] noSeComoNombrarEsto = new String[1];
+		
+		noSeComoNombrarEsto = this.nombre.split(" ");
+		
+		apellido = noSeComoNombrarEsto[1];
+		
+		return apellido;
+	}
 
 	@Override
 	public String toString() 

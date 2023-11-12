@@ -82,295 +82,369 @@ public class TestPrincipal
 			System.out.println(" 9 ---> Doctor asignado del paciente");
 			System.out.println(" 10 ---> Buscar doctores por especialidad");
 			
+			opcion = entradaInt.nextInt();
 			
-			try
+			switch (opcion)
 			{
-				opcion = entradaInt.nextInt();
-				
-				switch (opcion)
+				case 1:
 				{
-					case 1:
+					boolean salirIngresoDatos = false;
+					
+					salirRespuestaYN = false;
+					
+					int nDNI = 0;
+					
+					String nNombre = new String();
+					String nDireccion = new String();
+					
+					double nPeso = 0;
+					double nTemperatura = 0;
+					
+					/*-------------------------------*/
+					
+					System.out.println("--Registrar paciente--");
+					do
 					{
-						boolean salirIngresoDatos = false;
+						System.out.println("Ingrese el DNI del paciente: ");
+						nDNI = entradaInt.nextInt();
 						
-						salirRespuestaYN = false;
+						System.out.println("Ingrese el peso del paciente: ");
+						nPeso = entradaInt.nextDouble();
 						
-						int nDNI = 0;
+						System.out.println("Ingrese la temperatura del paciente: ");
+						nTemperatura = entradaInt.nextDouble();
 						
-						String nNombre = new String();
-						String nDireccion = new String();
+						System.out.println("Ingrese el nombre del paciente: ");
+						nNombre = entradaString.next();
 						
-						double nPeso = 0;
-						double nTemperatura = 0;
-						
-						/*-------------------------------*/
-						
-						System.out.println("--Registrar paciente--");
+						System.out.println("Ingrese la direccion del paciente: ");
+						nDireccion = entradaString.next();
+					
 						do
 						{
-							System.out.println("Ingrese el DNI del paciente: ");
-							nDNI = entradaInt.nextInt();
-							
-							System.out.println("Ingrese el peso del paciente: ");
-							nPeso = entradaInt.nextDouble();
-
-							System.out.println("Ingrese la temperatura del paciente: ");
-							nTemperatura = entradaInt.nextDouble();
-
-							System.out.println("Ingrese el nombre del paciente: ");
-							nNombre = entradaString.next();
-							
-							System.out.println("Ingrese la direccion del paciente: ");
-							nDireccion = entradaString.next();
-							
-							do
+							System.out.println("ESTOS DATOS SON CORRECTOS? (Y/N)");
+								
+							respuestaYN = entradaYN.next();
+								
+							if(respuestaYN.equals("Y") || respuestaYN.equals("y"))
 							{
-								System.out.println("ESTOS DATOS SON CORRECTOS? (Y/N)");
-									
-								respuestaYN = entradaYN.next();
-									
-								if(respuestaYN.equals("Y") || respuestaYN.equals("y"))
-								{
-									salirIngresoDatos = true;
-									salirRespuestaYN = true;
-								}
-								
-								else if(respuestaYN.equals("N") || respuestaYN.equals("n"))
-								{										
-									System.out.println("Ingrese los datos nuevamente");
-									salirRespuestaYN = true;
-								}
-								
-								else
-								{
-									System.out.println("RESPUESTA INVALIDA");
-								}
+								salirIngresoDatos = true;
+								salirRespuestaYN = true;
 							}
-							while(salirRespuestaYN == false);
+							
+							else if(respuestaYN.equals("N") || respuestaYN.equals("n"))
+							{										
+								System.out.println("Ingrese los datos nuevamente");
+								salirRespuestaYN = true;
+							}
+							
+							else
+							{
+								System.out.println("RESPUESTA INVALIDA");
+							}
 						}
-						while(salirIngresoDatos == false);
-						
-						Paciente nuevoPaciente = new Paciente(nDNI, nPeso, nTemperatura, nNombre, nDireccion, null);
-						hospital.agregarPaciente(nuevoPaciente);
-						
-						System.out.println("Paciente agregado exitosamente.");
-						
-						break;
+						while(salirRespuestaYN == false);
+					}
+					while(salirIngresoDatos == false);
+					
+					Paciente nuevoPaciente = new Paciente(nDNI, nPeso, nTemperatura, nNombre, nDireccion, null);
+					hospital.agregarPaciente(nuevoPaciente);
+					
+					System.out.println("Paciente agregado exitosamente.");
+					
+					System.out.println("");
+					salirMenu = true;
+					break;
+				}
+			
+				case 2:
+				{
+					int posicionRemover;
+					
+					salirRespuestaYN = false;
+					boolean salirOpcion2 = false;
+					
+					/*-----------------------*/
+					
+					System.out.println("--Remover paciente--");
+					hospital.mostrarPacientes();
+					
+					do
+					{
+						System.out.println("Que paciente va a remover?");
+						posicionRemover = entradaInt.nextInt();
+					
+						do
+						{
+							System.out.println("ESTA SEGURO? (Y/N)");
+								respuestaYN = entradaYN.next();
+							
+							if(respuestaYN.equals("Y") || respuestaYN.equals("y"))
+							{
+								salirOpcion2 = true;
+								salirRespuestaYN = true;
+							}
+							
+							else if(respuestaYN.equals("N") || respuestaYN.equals("n"))
+							{
+								System.out.println("Ingrese el dato nuevamente");
+								salirRespuestaYN = true;
+							}
+							
+							else
+							{
+								System.out.println("RESPUESTA INVALIDA");
+							}
+						}
+						while(salirRespuestaYN == false);
+					}
+					while(salirOpcion2 == false);
+					
+					hospital.removerPacientePorPosicion(posicionRemover);
+					
+					System.out.println("Paciente removido");
+					
+					System.out.println("");
+					salirMenu = true;
+					break;
 				}
 				
-					case 2:
-					{
-						int posicionRemover;
-						
-						salirRespuestaYN = false;
-						boolean salirOpcion2 = false;
-						
-						/*-----------------------*/
-						
-						System.out.println("--Remover paciente--");
-						hospital.mostrarPacientes();
-						
-						do
-						{
-							System.out.println("Que paciente va a remover?");
-							posicionRemover = entradaInt.nextInt();
-						
-							do
-							{
-								System.out.println("ESTA SEGURO? (Y/N)");
-
-								respuestaYN = entradaYN.next();
-								
-								if(respuestaYN.equals("Y") || respuestaYN.equals("y"))
-								{
-									salirOpcion2 = true;
-									salirRespuestaYN = true;
-								}
-								
-								else if(respuestaYN.equals("N") || respuestaYN.equals("n"))
-								{
-									System.out.println("Ingrese el dato nuevamente");
-									salirRespuestaYN = true;
-								}
-								
-								else
-								{
-									System.out.println("RESPUESTA INVALIDA");
-								}
-							}
-							while(salirRespuestaYN == false);
-						}
-						while(salirOpcion2 == false);
-						
-						hospital.removerPacientePorPosicion(posicionRemover);
-						
-						System.out.println("Paciente removido");
-						
-						break;
-					}
+				case 3:
+				{
+					int pacienteModificar;
+					int opcionModificar;
+					int mDNI;
 					
-					case 3:
-					{
-						int pacienteModificar;
-						int opcionModificar;
-						int mDNI;
-						
-						double mPeso;
-						double mTemperatura;
-						
-						String mNombre = new String();
-						String mDireccion = new String();
-						
-						boolean salirMenuModificar = false;
-						
-						/*---------------------------------*/
-						
-						System.out.println("--Modificar paciente--");
-						hospital.mostrarPacientes();
+					double mPeso;
+					double mTemperatura;
+					
+					String mNombre = new String();
+					String mDireccion = new String();
+					
+					boolean salirMenuModificar = false;
+					
+					/*---------------------------------*/
+					
+					System.out.println("--Modificar paciente--");
+					hospital.mostrarPacientes();
 
-						System.out.println("Que paciente desea modificar?");
-						pacienteModificar = entradaInt.nextInt();
+					System.out.println("Que paciente desea modificar?");
+					pacienteModificar = entradaInt.nextInt();
+										
+					System.out.println("Que va a modificar?");
+					System.out.println("1 ---> DNI");
+					System.out.println("2 ---> Peso");
+					System.out.println("3 ---> Temperatura");
+					System.out.println("4 ---> Nombre");
+					System.out.println("5 ---> Direccion");
+					do
+					{
+						opcionModificar = entradaInt.nextInt();
 						
-						
-						System.out.println("Que va a modificar?");
-						System.out.println("1 ---> DNI");
-						System.out.println("2 ---> Peso");
-						System.out.println("3 ---> Temperatura");
-						System.out.println("4 ---> Nombre");
-						System.out.println("5 ---> Direccion");
-						do
+						switch (opcionModificar)
 						{
-							opcionModificar = entradaInt.nextInt();
+							case 1:
+							{
+								System.out.println("Ingrese el nuevo DNI: ");
+								mDNI = entradaInt.nextInt();
+								
+								hospital.getPaciente(pacienteModificar).setDNI(mDNI);
+								
+								salirMenuModificar = true;
+								
+								break;
+							}
 							
-							switch (opcionModificar)
+							case 2:
 							{
-								case 1:
-								{
-									System.out.println("Ingrese el nuevo DNI: ");
-									mDNI = entradaInt.nextInt();
-									
-									hospital.getPaciente(pacienteModificar).setDNI(mDNI);
-									
-									salirMenuModificar = true;
-									
-									break;
-								}
+								System.out.println("Ingrese el nuevo peso: ");
+								mPeso = entradaDouble.nextDouble();
 								
-								case 2:
-								{
-									System.out.println("Ingrese el nuevo peso: ");
-									mPeso = entradaDouble.nextDouble();
-									
-									hospital.getPaciente(pacienteModificar).setPeso(mPeso);
-									
-									salirMenuModificar = true;
-									
-									break;
-								}
+								hospital.getPaciente(pacienteModificar).setPeso(mPeso);
 								
-								case 3:
-								{
-									System.out.println("Ingrese la nueva temperatura: ");
-									mTemperatura = entradaDouble.nextDouble();
-									
-									hospital.getPaciente(pacienteModificar).setTemperatura(mTemperatura);
-									
-									salirMenuModificar = true;
-									
-									break;
-								}
+								salirMenuModificar = true;
 								
-								case 4:
-								{
-									System.out.println("Ingrese el nuevo nombre: ");
-									mNombre = entradaString.next();
-									
-									hospital.getPaciente(pacienteModificar).setNombre(mNombre);
-									
-									salirMenuModificar = true;
-									
-									break;
-								}
+								break;
+							}
+							
+							case 3:
+							{
+								System.out.println("Ingrese la nueva temperatura: ");
+								mTemperatura = entradaDouble.nextDouble();
 								
-								case 5:
-								{
-									System.out.println("Ingrese la nueva direccion: ");
-									mDireccion = entradaString.next();
-									
-									hospital.getPaciente(pacienteModificar).setDireccion(mDireccion);
-									
-									salirMenuModificar = true;
-									
-									break;
-								}
+								hospital.getPaciente(pacienteModificar).setTemperatura(mTemperatura);
 								
-								default:
-								{
-									System.out.println("ERROR. RESPUESTA INVALIDA");
-									break;
-								}
+								salirMenuModificar = true;
+								
+								break;
+							}
+							
+							case 4:
+							{
+								System.out.println("Ingrese el nuevo nombre: ");
+								mNombre = entradaString.next();
+								
+								hospital.getPaciente(pacienteModificar).setNombre(mNombre);
+								
+								salirMenuModificar = true;
+								
+								break;
+							}
+							
+							case 5:
+							{
+								System.out.println("Ingrese la nueva direccion: ");
+								mDireccion = entradaString.next();
+								
+								hospital.getPaciente(pacienteModificar).setDireccion(mDireccion);
+								
+								salirMenuModificar = true;
+								
+								break;
+							}
+							
+							default:
+							{
+								System.out.println("ERROR. RESPUESTA INVALIDA");
+								break;
 							}
 						}
-						while(salirMenuModificar == false);
-						
-						System.out.println("Paciente modificado correctamente");
-						
-						break;
 					}
+					while(salirMenuModificar == false);
 					
-					case 4:
-					{
-						
-					}
+					System.out.println("Paciente modificado correctamente");
 					
-					case 5:
-					{
-						
-					}
-					
-					case 6:
-					{
-						double pesoMaximo = 0;
-						double pesoMinimo = 0;
-						
-						/*--------------------*/
-						
-						System.out.println("--Peso moda--");
-						
-						pesoMaximo = hospital.pesoMaximo();
-						pesoMinimo = hospital.pesoMinimo();
-						
-						System.out.println("El peso maximo es : " + pesoMaximo);
-						System.out.println("El peso minimo es : " + pesoMinimo);
-						
-						break;
-					}
-					
-					case 7:
-					{
-						
-					}
-					
-					case 8:
-					{
-						
-					}
-					
-					case 9:
-					{
-						
-					}
-					
-					case 10:
-					{
-						
-					}
+					System.out.println("");
+					salirMenu = true;
+					break;
 				}
-			}
-			
-			catch(InputMismatchException ex)
-			{
-				System.out.println("ERROR. CARACTER INVALIDO");
+				
+				case 4:
+				{
+					
+				}
+				
+				case 5:
+				{
+					
+				}
+				
+				case 6:
+				{
+					double pesoMaximo = 0;
+					double pesoMinimo = 0;
+					
+					/*--------------------*/
+					
+					System.out.println("--Peso moda--");
+					
+					pesoMaximo = hospital.pesoMaximo();
+					pesoMinimo = hospital.pesoMinimo();
+					
+					System.out.println("El peso maximo es : " + pesoMaximo);
+					System.out.println("El peso minimo es : " + pesoMinimo);
+					
+					System.out.println("");
+					salirMenu = true;
+					break;
+				}
+				
+				case 7:
+				{
+					
+				}
+				
+				case 8:
+				{
+					System.out.println("--Mostrar pacientes por apellido--");
+					
+					hospital.mostrarPacientesApellido();
+					
+					System.out.println("");
+					salirMenu = true;
+					break;
+				}
+				
+				case 9:
+				{
+					int opcionBuscar;
+					int DNIBuscar;
+					
+					String nombreBuscar = new String();
+					
+					boolean salirMenuBuscar = false;
+					
+					Paciente pacienteBuscado = new Paciente();
+					
+					/*------------------------------*/
+					
+					System.out.println("--Doctor asignado del paciente--");
+					
+					do
+					{
+						System.out.println("Ingrese la opcion para buscar al paciente: ");
+						System.out.println("1 ---> Ingresar nombre");
+						System.out.println("2 ---> Ingresar DNI");
+						opcionBuscar = entradaInt.nextInt();
+						
+						switch (opcionBuscar)
+						{
+							case 1:
+							{
+								salirMenuBuscar = true;
+								break;
+							}
+							
+							case 2:
+							{
+								salirMenuBuscar = true;
+								break;
+							}
+							
+							default:
+							{
+								System.out.println("ERROR. RESPUESTA INVALIDA");
+								break;
+							}
+						}
+						
+					}
+					while(salirMenuBuscar == false);
+					
+					if(opcionBuscar == 1)
+					{
+						System.out.println("Ingrese el nombre del paciente:");
+						System.out.println("Ejemplo: Mario Retamozo");
+						nombreBuscar = entradaString.nextLine();
+						
+						pacienteBuscado = hospital.buscarPacienteNombre(nombreBuscar);
+						hospital.quienAtendioEstePaciente(pacienteBuscado);
+					}
+					
+					if(opcionBuscar == 2)
+					{
+						System.out.println("Ingrese el DNI del paciente:");
+						System.out.println("Ejemplo: 12345678");
+						DNIBuscar = entradaInt.nextInt();
+						
+						pacienteBuscado = hospital.buscarPacienteDNI(DNIBuscar);
+						hospital.quienAtendioEstePaciente(pacienteBuscado);
+					}
+					
+					System.out.println("");
+					salirMenu = true;
+					break;
+				}
+				
+				case 10:
+				{
+					
+				}
+				
+				default:
+				{
+					System.out.println("ERROR. RESPUESTA INVALIDO");
+				}
 			}
 		}
 		while(salirMenu == false);
