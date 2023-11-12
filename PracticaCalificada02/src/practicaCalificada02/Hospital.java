@@ -1,6 +1,7 @@
 package practicaCalificada02;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Hospital 
 {
@@ -53,6 +54,41 @@ public class Hospital
 			System.out.println("Paciente " + contador + ": " +  this.pacientesHospital.get(contador).toString());
 		}
 	}
+	
+	public Paciente getPaciente(int posicion)
+	{
+		return this.pacientesHospital.get(posicion);
+		
+	}
+	
+	public double pesoMaximo()
+	{
+		ArrayList<Double> pesosPaciente = new ArrayList<Double>();
+		
+		for(Paciente paciente : this.pacientesHospital)
+		{
+			pesosPaciente.add(paciente.getPeso());
+		}
+		
+		double pesoMaximo = Collections.max(pesosPaciente);
+		
+		return pesoMaximo;
+	}
+	
+	public double pesoMinimo()
+	{
+		ArrayList<Double> pesosPaciente = new ArrayList<Double>();
+		
+		for(Paciente paciente : this.pacientesHospital)
+		{
+			pesosPaciente.add(paciente.getPeso());
+		}
+		
+		double pesoMinimo = Collections.min(pesosPaciente);
+		
+		return pesoMinimo;
+	}
+	
 	
 	@Override
 	public String toString() 
